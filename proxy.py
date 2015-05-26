@@ -74,22 +74,22 @@ def rewrite_urls(string, uri, base):
 def add_in_up_script(html_doc, up_options):
     soup = BeautifulSoup(html_doc, "html5lib")
     tag_placed = soup.find_all('script', attrs={
-        "%s" % up_options.get('attr'): "%s" % up_options.get('id')
+        "%s" % up_options.get('attr'): "%s" % up_options.get('widget-id')
     })
     # print "num tags placed=", len(tag_placed)
     if len(tag_placed) <= 0:
-        kwargs = {k:v for k, v in up_options.items() if k}
+        kwargs = {k:v for k, v in up_options.items() if k and not k.startswith('widget')}
         kwargs.update({'type':'text/javascript'})
         new_tag = soup.new_tag("script", **kwargs)
-        new_tag.string = """var WidgetCTC = window.WidgetCTC || {};
+        new_tag.string = """var %s = window.%s || {};
         var p = window.location.protocol == 'https:' ? 'https:' : 'http:' ;
         (function() { 
             var script = document.createElement('script');
             script.async = true;
-            script.src = p+'//cdn.userpath.dev:8080/js/click_to_call.min.js';
+            script.src = p+'//%s';
             var entry = document.getElementsByTagName('script')[0];
             entry.parentNode.insertBefore(script, entry);
-        })();"""
+        })();""" % (up_options.get('widget'), up_options.get('widget'), up_options.get('widget-loc'))
         soup.body.append(new_tag)
     return str(soup)
 
@@ -151,13 +151,12 @@ def hello(url):
 
     if needs_up_script:
         options = {
-            'id': request.args.get('up_id'),
+            'widget-id': request.args.get('up_id'),
             'widget': request.args.get('widget'),
-            'attr': request.args.get('data-attr'),
-            'attr-x-1': request.args.get('attr-x-1'),
-            'attr-x-2': request.args.get('attr-x-2'),
-            'val-x-2': request.args.get('attr-x-2'),
-            'val-x-2': request.args.get('val-x-2'),
+            request.args.get('data-attr'): request.args.get('up_id'),
+            request.args.get('attr-x-1'): request.args.get('val-x-1'),
+            request.args.get('attr-x-2'): request.args.get('val-x-2'),
+            'widget-loc': request.args.get('widget_loc')
         }
         modded_response = add_in_up_script(modded_response, options)
 
