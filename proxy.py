@@ -78,12 +78,9 @@ def add_in_up_script(html_doc, up_options):
     })
     # print "num tags placed=", len(tag_placed)
     if len(tag_placed) <= 0:
-        new_tag = soup.new_tag("script", **{
-            'type':'text/javascript',
-            up_options.get('attr'): up_options.get('id'),
-            up_options.get('attr-x-1'): up_options.get('val-x-1'),
-            up_options.get('attr-x-2'): up_options.get('val-x-2')
-        })
+        kwargs = {k:v for k, v in up_options.items() if k}
+        kwargs.update({'type':'text/javascript'})
+        new_tag = soup.new_tag("script", **kwargs)
         new_tag.string = """var WidgetCTC = window.WidgetCTC || {};
         var p = window.location.protocol == 'https:' ? 'https:' : 'http:' ;
         (function() { 
