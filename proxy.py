@@ -104,7 +104,7 @@ def hello(url):
     # print 'URL2: %s' % url
     if url.count('http') == 0:
         url = 'http://'+url
-    print 'URL3: %s' % url
+    # print 'URL3: %s' % url
     parsed = urlparse.urlparse(url)
     url = parsed.geturl()
     # print 'URL4: %s' % url
@@ -113,7 +113,7 @@ def hello(url):
     # print "CLASSSSS", request.headers.__class__.__name__
     # prepped = s.prepare_request(req)
     # response = s.send(prepped)
-    print "HOST!", parsed.netloc
+    # print "HOST!", parsed.netloc
     headers_as_dict = {
         'User-Agent': request.headers.get('User-Agent'), 
         'Host': parsed.netloc,
@@ -162,7 +162,8 @@ def hello(url):
 
     r = make_response(modded_response)
     for k, v in response.headers.items():
-        r.headers[k] = v
+        if k.lower() != 'x-frame-options':
+            r.headers[k] = v
 
     return r
 
