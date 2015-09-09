@@ -24,4 +24,4 @@ location @yourapplication {
 
 `pip install uwsgi`
 
-run from same directory as `proxy.py`: `uwsgi -s /tmp/uwsgi.sock --module proxy --callable app`
+run from same directory as `proxy.py`: `uwsgi -s /tmp/uwsgi.sock -b 10000 --module proxy --callable app`
