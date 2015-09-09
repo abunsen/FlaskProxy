@@ -96,8 +96,8 @@ def add_in_up_script(html_doc, up_options):
 
 @app.route('/preview/<path:url>')
 def hello(url):
-    url = url.replace('http:/', 'http://')
-    url = url.replace('https:/', 'https://')
+    # url = url.replace('http:/', 'http://')
+    # url = url.replace('https:/', 'https://')
     # url = request.args['url']
     # print 'URL: %s' % url
     # url = url.replace('www.','')
