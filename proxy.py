@@ -1,7 +1,7 @@
 import os
 import re
 from bs4 import BeautifulSoup
-from flask import Flask, make_response, request
+from flask import Flask, make_response, request, redirect, url_for
 import urlparse
 # from requests import Request, Session
 import requests
@@ -121,10 +121,13 @@ def hello(url):
         'Accept-Encoding': request.headers.get('Accept-Encoding'),
         # 'Cookie': request.headers.get('Cookie')
     }
-    response = requests.get(url, headers=headers_as_dict)
+    response = requests.get(url, headers=headers_as_dict, allow_redirects=False)
     # print response.text
     needs_to_be_parsed = response.headers.get('content-type', '').split(';')[0] in needs_parsed
     needs_up_script = response.headers.get('content-type', '').split(';')[0] in needs_script
+
+    if "location" in response.headers and 'userpathpreviews.com' not in response.headers["location"]:
+        return redirect(url_for('hello', url=response.headers["location"]))
 
     if needs_to_be_parsed and response.headers.get('content-length'):
         del response.headers['content-length']
