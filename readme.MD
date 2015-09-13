@@ -34,3 +34,8 @@ location @yourapplication {
 `pip install uwsgi`
 
 run from same directory as `proxy.py`: `gunicorn -w 4 -b 127.0.0.1:8080 proxy:app &`
+
+##### deploy
+
+
+`cd ~/apps/ && rm -rf FlaskProxy && git clone git@github.com:abunsen/FlaskProxy.git && cd FlaskProxy && source ~/apps/bin/activate && kill `cat ~/up.proxy.pid` && gunicorn -w 4 -D -b 127.0.0.1:8080 proxy:app -p ~/up.proxy.pid`
