@@ -79,7 +79,7 @@ def add_in_up_script(html_doc, up_options):
     # print "num tags placed=", len(tag_placed)
     if len(tag_placed) <= 0:
         kwargs = {k:v for k, v in up_options.items() if k and not k.startswith('widget')}
-        kwargs.update({'type':'text/javascript'})
+        kwargs.update({'type':'text/javascript', 'data-preview':True})
         new_tag = soup.new_tag("script", **kwargs)
         new_tag.string = """var %s = window.%s || {};
         var p = window.location.protocol == 'https:' ? 'https:' : 'http:' ;
