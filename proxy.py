@@ -128,11 +128,11 @@ def hello(url):
 
     if "location" in response.headers and 'userpathpreviews.com' not in response.headers["location"]:
         args_list = ["%s=%s" % (k,v) for k, v in request.args.items()]
-        if "?" in response.headers["location"]:
-            url_with_args = "&%s" % "&".join(args_list)
-        else:
-            url_with_args = "?%s%s" % (args_list[0], "&".join(args_list[1:]))
-        return redirect(url_for('hello', url=url_with_args))
+        # if "?" in response.headers["location"]:
+        #     url_with_args = "%s&%s" % (response.headers["location"], "&".join(args_list))
+        # else:
+        #     url_with_args = "%s?%s%s" % (response.headers["location"], args_list[0], "&".join(args_list[1:]))
+        return redirect(url_for('hello', url=response.headers["location"], **request.args))
 
     if needs_to_be_parsed and response.headers.get('content-length'):
         del response.headers['content-length']
