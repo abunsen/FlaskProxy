@@ -85,13 +85,11 @@ def add_in_up_script(html_doc, up_options):
         var p = window.location.protocol == 'https:' ? 'https:' : 'http:' ;
         (function() { 
             var script = document.createElement('script');
-            var up_script = document.querySelector('[data-preview=True]');
-            var attrs = up_script.attributes;
+            var attrs = document.querySelector('[data-preview=True]').attributes;
             script.async = true;
             script.src = p+'//%s';
             for (i=0;attrs.length;i++){
-                console.log('debug >>>', attrs[i]);
-                script.setAttribute(attrs[i], up_script.getAttribute(attrs[i]));
+                script.setAttribute(attrs[i].name, attrs[i].value);
             }
 
             var entry = document.getElementsByTagName('script')[0];
