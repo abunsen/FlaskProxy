@@ -88,6 +88,7 @@ def add_in_up_script(html_doc, up_options):
             script.async = true;
             script.src = p+'//%s';
             script.setAttribute('%s', '%s');
+            script.setAttribute('data-preview', 'True');
 
             var entry = document.getElementsByTagName('script')[0];
             entry.parentNode.insertBefore(script, entry);
