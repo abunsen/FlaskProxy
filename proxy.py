@@ -85,17 +85,13 @@ def add_in_up_script(html_doc, up_options):
         var p = window.location.protocol == 'https:' ? 'https:' : 'http:' ;
         (function() { 
             var script = document.createElement('script');
-            var attrs = document.querySelector('[data-preview=True]').attributes;
-            console.log('debugg >> ', attrs);
-            for (i=0;attrs.length;i++){
-                script.setAttribute(attrs[i].name, attrs[i].value);
-            }
             script.async = true;
             script.src = p+'//%s';
+            script.setAttribute('%s', '%s');
 
             var entry = document.getElementsByTagName('script')[0];
             entry.parentNode.insertBefore(script, entry);
-        })();""" % (up_options.get('widget'), up_options.get('widget'), up_options.get('widget-loc'))
+        })();""" % (up_options.get('widget'), up_options.get('widget'), up_options.get('widget-loc'), up_options.get('data-attr'), up_options.get('up_id'))
         soup.body.append(new_tag)
     return str(soup)
 
