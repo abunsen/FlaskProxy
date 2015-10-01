@@ -85,14 +85,14 @@ def add_in_up_script(html_doc, up_options):
         var p = window.location.protocol == 'https:' ? 'https:' : 'http:' ;
         (function() { 
             var script = document.createElement('script');
-            var up_script = document.querySelectorAll('[data-preview=True]');
+            var up_script = document.querySelector('[data-preview=True]');
             var attrs = up_script.attributes;
             script.async = true;
             script.src = p+'//%s';
             for (i=0;attrs.length;i++){
                 script.setAttribute(attrs[i], up_script.getAttribute(attrs[i]));
             }
-            
+
             var entry = document.getElementsByTagName('script')[0];
             entry.parentNode.insertBefore(script, entry);
         })();""" % (up_options.get('widget'), up_options.get('widget'), up_options.get('widget-loc'))
