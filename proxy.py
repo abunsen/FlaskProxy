@@ -91,7 +91,7 @@ def add_in_up_script(html_doc, up_options):
 
             var entry = document.getElementsByTagName('script')[0];
             entry.parentNode.insertBefore(script, entry);
-        })();""" % (up_options.get('widget'), up_options.get('widget'), up_options.get('widget-loc'), up_options.get('attr'), up_options.get('widget-id'))
+        })();""" % (up_options.get('widget'), up_options.get('widget'), up_options.get('widget-loc'), up_options.get('widget-attr'), up_options.get('widget-id'))
         soup.body.append(new_tag)
     return str(soup)
 
@@ -167,7 +167,7 @@ def hello(url):
             request.args.get('attr-x-1'): request.args.get('val-x-1'),
             request.args.get('attr-x-2'): request.args.get('val-x-2'),
             'widget-loc': request.args.get('widget_loc'),
-            'attr': request.args.get('data-attr')
+            'widget-attr': request.args.get('data-attr')
         }
         modded_response = add_in_up_script(modded_response, options)
 
