@@ -86,11 +86,11 @@ def add_in_up_script(html_doc, up_options):
         (function() { 
             var script = document.createElement('script');
             var attrs = document.querySelector('[data-preview=True]').attributes;
-            script.async = true;
-            script.src = p+'//%s';
             for (i=0;attrs.length;i++){
                 script.setAttribute(attrs[i].name, attrs[i].value);
             }
+            script.async = true;
+            script.src = p+'//%s';
 
             var entry = document.getElementsByTagName('script')[0];
             entry.parentNode.insertBefore(script, entry);
