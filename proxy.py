@@ -166,7 +166,8 @@ def hello(url):
             request.args.get('data-attr'): request.args.get('up_id'),
             request.args.get('attr-x-1'): request.args.get('val-x-1'),
             request.args.get('attr-x-2'): request.args.get('val-x-2'),
-            'widget-loc': request.args.get('widget_loc')
+            'widget-loc': request.args.get('widget_loc'),
+            'attr': request.args.get('data-attr')
         }
         modded_response = add_in_up_script(modded_response, options)
 
