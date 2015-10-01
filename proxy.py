@@ -86,6 +86,7 @@ def add_in_up_script(html_doc, up_options):
         (function() { 
             var script = document.createElement('script');
             var attrs = document.querySelector('[data-preview=True]').attributes;
+            console.log('debugg >> ', attrs);
             for (i=0;attrs.length;i++){
                 script.setAttribute(attrs[i].name, attrs[i].value);
             }
