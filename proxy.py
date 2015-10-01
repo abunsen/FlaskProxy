@@ -91,7 +91,7 @@ def add_in_up_script(html_doc, up_options):
 
             var entry = document.getElementsByTagName('script')[0];
             entry.parentNode.insertBefore(script, entry);
-        })();""" % (up_options.get('widget'), up_options.get('widget'), up_options.get('widget-loc'), up_options.get('data-attr'), up_options.get('up_id'))
+        })();""" % (up_options.get('widget'), up_options.get('widget'), up_options.get('widget-loc'), up_options.get('attr'), up_options.get('widget-id'))
         soup.body.append(new_tag)
     return str(soup)
 
