@@ -11,6 +11,7 @@ import requests
 # html5lib
 
 app = Flask(__name__)
+app.config['SERVER_NAME'] = 'userpathpreviews.com'
 app.debug = True
 
 needs_parsed = [
