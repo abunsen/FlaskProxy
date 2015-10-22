@@ -11,9 +11,7 @@ import requests
 # html5lib
 
 app = Flask(__name__)
-app.config.update(dict(
-  PREFERRED_URL_SCHEME = 'https'
-))
+app.config['SERVER_NAME'] = 'userpathpreviews.com'
 app.debug = True
 
 needs_parsed = [
@@ -138,7 +136,7 @@ def hello(url):
         #     url_with_args = "%s&%s" % (response.headers["location"], "&".join(args_list))
         # else:
         #     url_with_args = "%s?%s%s" % (response.headers["location"], args_list[0], "&".join(args_list[1:]))
-        return redirect(url_for('hello', url=response.headers["location"], **request.args))
+        return redirect(url_for('hello', _external=True, _scheme='https', url=response.headers["location"], **request.args))
 
     if needs_to_be_parsed and response.headers.get('content-length'):
         del response.headers['content-length']
@@ -185,4 +183,4 @@ def hello(url):
 if __name__ == '__main__':
     # Bind to PORT if defined, otherwise default to 5000.
     port = int(os.environ.get('PORT', 5000))
-    app.run(port=port)
+    app.run(host=app.config['SERVER_NAME'], port=port)
