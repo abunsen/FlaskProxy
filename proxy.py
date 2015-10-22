@@ -135,7 +135,7 @@ def hello(url):
         #     url_with_args = "%s&%s" % (response.headers["location"], "&".join(args_list))
         # else:
         #     url_with_args = "%s?%s%s" % (response.headers["location"], args_list[0], "&".join(args_list[1:]))
-        return redirect(url_for('hello', url=response.headers["location"], **request.args))
+        return redirect(url_for('hello', _scheme='https', url=response.headers["location"], **request.args))
 
     if needs_to_be_parsed and response.headers.get('content-length'):
         del response.headers['content-length']
