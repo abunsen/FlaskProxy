@@ -69,7 +69,7 @@ def hello(url):
     plain_url_png = re.sub('(\.|\/|\-)', '', parsed.hostname+parsed.path)+'-full.png'
     png_loc = "./static/"+plain_url_png
     if not os.path.isfile(png_loc):
-        args = ["webkit2png","-W","1365","-H","768","-D", "./static","-F", url]
+        args = ["./node_modules/phantomjs/bin/phantomjs", "screenshot.js", url]
         page_png = subprocess.check_output(args)
 
     with open(png_loc, 'rb') as f:
@@ -80,7 +80,7 @@ def hello(url):
         <title>Preview of %s</title>
     </head>
     <body style="background: url(%s); background-size: cover; height: %spx;">
-        Test
+        
     </body>
     </html>
     """ % (url, url_for('static', filename=plain_url_png), get_image_info(data)[1])

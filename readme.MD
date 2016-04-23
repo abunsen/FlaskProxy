@@ -10,9 +10,9 @@ Params:
 
 `pip install -r requirements.txt`
 
-also needs https://github.com/paulhammond/webkit2png/ do this to get it:
+also needs node, npm & the following packages::
 
-`cd /usr/local/bin && wget https://raw.github.com/paulhammond/webkit2png/master/webkit2png && chmod a+x webkit2png`
+`npm install phantomjs phantom-url`
 
 ### production
 
