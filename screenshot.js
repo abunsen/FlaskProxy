@@ -5,12 +5,13 @@ var parsed = require('phantom-url')(args[1]);
 var url = args[1];
 
 page.viewportSize = {
-  width: 1365,
-  height: 768 
+  width: args[2]||1365,
+  height: args[3]||768 
 };
 
 page.open(url, function() {
-  var filename = (parsed.hostname+parsed.pathname).replace(/(\/|\-|\.)/g, '')+'-full.png';
+  var isMobile = args[2] < 1365 && args[3] < 768;
+  var filename = (parsed.hostname+parsed.pathname).replace(/(\/|\-|\.)/g, '')+'-full-'+(isMobile ? 'mobile' : 'desktop')+'.png';
   page.render('./static/'+filename);
   console.log(filename);
   phantom.exit();
