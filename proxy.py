@@ -51,7 +51,7 @@ def add_in_up_script(html_doc, up_options):
     kwargs = {
         'type':'text/javascript', 
         'data-preview':True,
-        'src': "%s/w/get/%s.js" % (up_options.get('up-host', "//userpath.co"), up_options.get('up-id'))
+        'src': "%s/w/get/%s.js?url=%s" % (up_options.get('up-host', "//userpath.co"), up_options.get('up-id'), up_options.get('up-url'))
     }
     new_tag = soup.new_tag("script", **kwargs)
     soup.body.append(new_tag)
@@ -87,7 +87,8 @@ def hello(url):
 
     options = {
         'up-id': request.args.get('id'),
-        'up-host': request.args.get('host')
+        'up-host': request.args.get('host'),
+        'up-url': request.args.get('url')
     }
     r = add_in_up_script(r, options)
 
