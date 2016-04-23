@@ -66,10 +66,12 @@ def hello(url):
     # print 'URL3: %s' % url
     parsed = urlparse.urlparse(url)
     url = parsed.geturl()
-    plain_url_png = re.sub('(\.|\/|\-)', '', parsed.hostname+parsed.path)+'-full.png'
-    png_loc = "./static/"+plain_url_png
     width = request.args.get('width', "1365")
     height = request.args.get('height', "768")
+    device = "desktop" if width == "1365" and height == "768" else "mobile"
+    plain_url_png = re.sub('(\.|\/|\-)', '', parsed.hostname+parsed.path)+'-full-'+device+'.png'
+    png_loc = "./static/"+plain_url_png
+    
     if not os.path.isfile(png_loc):
         args = ["./node_modules/phantomjs/bin/phantomjs", "screenshot.js", url, width, height]
         page_png = subprocess.check_output(args)
