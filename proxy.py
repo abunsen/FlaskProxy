@@ -68,8 +68,8 @@ def hello(url):
     url = parsed.geturl()
     plain_url_png = re.sub('(\.|\/|\-)', '', parsed.hostname+parsed.path)+'-full.png'
     png_loc = "./static/"+plain_url_png
-    width = request.args.get('width', 1365)
-    height = request.args.get('height', 768)
+    width = request.args.get('width', "1365")
+    height = request.args.get('height', "768")
     if not os.path.isfile(png_loc):
         args = ["./node_modules/phantomjs/bin/phantomjs", "screenshot.js", url, width, height]
         page_png = subprocess.check_output(args)
