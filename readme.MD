@@ -3,16 +3,16 @@
 ### usage
 
 Params:
-`up_id` renders widget_id for file directory & used in the `data-attr` below
-`widget` is the JS Class name
-`data-attr` is the data attribute on the script tag
-`attr-x-1` is extra attribute one, paired with `val-x-1` as its value
-`attr-x-2` is extra attribute one, paired with `val-x-2` as its value
-`widget_loc` is where the widget lives
+`id` renders widget_id for file directory & used in the `data-attr` below
+`host` is where the widget lives
 
 ### set up
 
 `pip install -r requirements.txt`
+
+also needs https://github.com/paulhammond/webkit2png/ do this to get it:
+
+`cd /usr/local/bin && wget https://raw.github.com/paulhammond/webkit2png/master/webkit2png && chmod a+x webkit2png`
 
 ### production
 
