@@ -11,7 +11,7 @@ import urlparse
 # html5lib
 
 app = Flask(__name__)
-# app.config['SERVER_NAME'] = 'userpathpreviews.com'
+app.config['SERVER_NAME'] = 'userpathpreviews.com'
 app.debug = True
 
 needs_parsed = [
@@ -51,7 +51,7 @@ def add_in_up_script(html_doc, up_options):
     kwargs = {
         'type':'text/javascript', 
         'data-preview':True,
-        'src': "%s/w/get/%s.js" % (up_options.get('up-host'), up_options.get('up-id'))
+        'src': "%s/w/get/%s.js" % (up_options.get('up-host', "//userpath.co"), up_options.get('up-id'))
     }
     new_tag = soup.new_tag("script", **kwargs)
     soup.body.append(new_tag)
@@ -96,5 +96,5 @@ def hello(url):
 if __name__ == '__main__':
     # Bind to PORT if defined, otherwise default to 5000.
     port = int(os.environ.get('PORT', 5000))
-    app.run(port=8080)
-    # app.run(host=app.config['SERVER_NAME'], port=port)
+    # app.run(port=8080)
+    app.run(host=app.config['SERVER_NAME'], port=port)
