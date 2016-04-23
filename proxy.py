@@ -88,7 +88,7 @@ def hello(url):
     options = {
         'up-id': request.args.get('id'),
         'up-host': request.args.get('host'),
-        'up-url': request.args.get('url')
+        'up-url': url
     }
     r = add_in_up_script(r, options)
 
