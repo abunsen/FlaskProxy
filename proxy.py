@@ -100,7 +100,7 @@ def hello(url):
         'up-id': request.args.get('id'),
         'up-host': request.args.get('host'),
         'up-url': url,
-        'up-mobile': '&mobile=true' if device else ''
+        'up-mobile': '&mobile=true' if device == 'mobile' else ''
     }
     r = add_in_up_script(r, options)
 
