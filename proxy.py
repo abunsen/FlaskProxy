@@ -49,7 +49,7 @@ def is_png(data):
 def add_in_up_script(html_doc, up_options):
     soup = BeautifulSoup(html_doc, "html5lib")
     info_tuple = (
-        up_options.get('up-host', "//userpath.co"), 
+        up_options.get('up-host', "//app.userpath.co"), 
         up_options.get('up-id'), 
         up_options.get('up-url'),
         up_options.get('up-mobile'),
@@ -72,7 +72,7 @@ def hello(url):
     # print 'URL3: %s' % url
     parsed = urlparse.urlparse(url)
     url = parsed.geturl()
-    if "127.0.0.1" in url or "localhost" in url:
+    if "127.0.0.1" in parsed.hostname or "localhost" in parsed.hostname:
         abort(403)
     width = request.args.get('width', "1365")
     height = request.args.get('height', "768")
@@ -101,7 +101,7 @@ def hello(url):
     options = {
         'up-id': request.args.get('id'),
         'up-host': request.args.get('host'),
-        'up-url': url,
+        'up-url': url, # used back in UserPath
         'up-mobile': '&mobile=true' if device == 'mobile' else ''
     }
     r = add_in_up_script(r, options)
