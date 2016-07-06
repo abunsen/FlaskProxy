@@ -3,7 +3,7 @@ import re
 import struct
 import subprocess
 from bs4 import BeautifulSoup
-from flask import Flask, make_response, request, redirect, url_for
+from flask import Flask, make_response, request, redirect, url_for, abort
 import urlparse
 
 # requests
@@ -72,6 +72,8 @@ def hello(url):
     # print 'URL3: %s' % url
     parsed = urlparse.urlparse(url)
     url = parsed.geturl()
+    if "127.0.0.1" in url or "localhost" in url:
+        abort(403)
     width = request.args.get('width', "1365")
     height = request.args.get('height', "768")
     device = "desktop" if width == "1365" and height == "768" else "mobile"
