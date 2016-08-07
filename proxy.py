@@ -81,7 +81,7 @@ def hello(url):
     png_loc = "./static/"+plain_url_png
     
     if not os.path.isfile(png_loc):
-        args = ["./node_modules/phantomjs/bin/phantomjs", "screenshot.js", url, width, height]
+        args = ["./node_modules/phantomjs/bin/phantomjs", "--ignore-ssl-errors=yes", "screenshot.js", url, width, height]
         page_png = subprocess.check_output(args)
 
     with open(png_loc, 'rb') as f:
